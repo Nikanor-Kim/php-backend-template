@@ -1,0 +1,22 @@
+{
+    "sensei_hash": "20432572.228311557.88162f1f1dab8d87.1748857111",
+    "account_id": "20432572",
+    "leads": {
+        "sensei": [
+            {
+                "id": "11111111",
+                "date_create": "1746601092",
+                "created_user_id": "9610082",
+                "last_modified": "1748857111",
+                "modified_user_id": "2108665",
+                "name": "Тест",
+                "responsible_user_id": "10108534",
+                "closest_task": "0",
+                "date_close": "0",
+                "pipeline_id": "5894638",
+                "status_id": "51472954",
+                "price": "22050"
+            }
+        ]
+    }
+}

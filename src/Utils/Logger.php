@@ -30,7 +30,7 @@ class Logger
         }
 
         // Финальный путь до лог-файла
-        $filename = date('Y-m-d') . '.log';
+        $filename = 'webhook_' . date('Y-m-d') . '.log';
 
         return $fullDirPath . '/' . $filename;
     }
@@ -55,6 +55,13 @@ class Logger
                 ? $data
                 : var_export($data, true));
 
+        // if (self::$leadId) {
+        //     $logMessage = "[$timestamp] [" . self::$leadId . "] [$level] [$callerFile] $comment" . " - " . $formattedData . PHP_EOL;
+
+        // } else {
+        //     $logMessage = "[$timestamp] [$level] [$callerFile] $comment" . " - " . $formattedData . PHP_EOL;
+
+        // }
         $logMessage = "[$timestamp] "
             . "[" . self::setEmoji($level) . "] [$callerFile]"
             . (self::$leadId ? "[" . self::$leadId . "] " : "")
@@ -71,6 +78,9 @@ class Logger
             file_put_contents(self::getLogFilePath(), $logMessage, FILE_APPEND);
         }
         file_put_contents(self::getLogFilePath('debug'), $logMessage, FILE_APPEND);
+
+
+
 
     }
 

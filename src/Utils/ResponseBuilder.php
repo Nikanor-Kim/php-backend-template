@@ -1,5 +1,9 @@
 <?php
+
 namespace App\Utils;
+
+use App\Utils\Timer;
+
 
 class ResponseBuilder
 {
@@ -9,13 +13,15 @@ class ResponseBuilder
         http_response_code($code);
         self::send($message);
         self::finalizeOutput();
-
     }
 
     public static function error($message, $code = 500): void
     {
         http_response_code($code);
         self::send($message, 'error');
+        Timer::stopTimer();
+
+
         exit;
     }
 
@@ -23,6 +29,8 @@ class ResponseBuilder
     {
         http_response_code($code);
         self::send($message, 'warning');
+        Timer::stopTimer();
+
         exit;
     }
 
@@ -38,8 +46,6 @@ class ResponseBuilder
             'message' => $message
         ];
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
-
-
     }
     private static function finalizeOutput()
     {

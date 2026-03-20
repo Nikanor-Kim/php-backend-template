@@ -24,7 +24,8 @@ class DebugHelper
         }
 
         $json = file_get_contents($file);
-        $data = json_decode($json, true);
+        // $data = json_decode($json, true);
+        $data = self::json_decode_with_comments($json, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
             Logger::log("Ошибка при разборе JSON: " . json_last_error_msg());
@@ -34,5 +35,16 @@ class DebugHelper
 
 
         return $data;
+    }
+
+    public static function json_decode_with_comments(string $json, bool $assoc = true)
+    {
+        // удалить // комментарии
+        $json = preg_replace('!//.*!', '', $json);
+
+        // удалить /* */ комментарии
+        $json = preg_replace('!/\*.*?\*/!s', '', $json);
+
+        return json_decode($json, $assoc);
     }
 }

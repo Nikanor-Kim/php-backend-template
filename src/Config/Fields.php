@@ -1,14 +1,14 @@
 <?php
 namespace App\Config;
 
-final class AmoCrmFields
+final class Fields
 {
     public static function get(): array
     {
         return [
 
             // === 1. Основные параметры расчёта ===
-            'pricing_name' => ['id' => 701973, 'type' => 'text'],
+            'field_name' => ['id' => 000000, 'type' => 'text'],
 
         ];
     }

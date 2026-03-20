@@ -1,18 +1,38 @@
 <?php
+
 namespace App\Utils;
 
 class ResultBuilder
 {
-    public static function success($message)
+    private static function buildMessage(array $messages): string
     {
-        return ['status' => 'success', 'message' => $message];
+        return implode(PHP_EOL, $messages);
     }
-    public static function error($message)
+
+    public static function success($payload)
     {
-        return ['status' => 'error', 'message' => $message];
+        return [
+            'status' => 'success',
+            'payload' => $payload
+        ];
     }
-    public static function warning($message)
+    // Если есть примечание 
+    public static function warning($notes, $payload)
     {
-        return ['status' => 'warning', 'message' => $message];
+        return [
+            'status' => 'warning',
+            'notes' => self::buildMessage($notes),
+            'payload' => $payload
+        ];
+    }
+    // Если есть ошибка
+    public static function error($notes, $error, $payload)
+    {
+        return [
+            'status' => 'error',
+            'notes' => self::buildMessage($notes),
+            'error' => $error,
+            'payload' => $payload
+        ];
     }
 }

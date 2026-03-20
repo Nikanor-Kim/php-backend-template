@@ -18,13 +18,13 @@ class Router
         $uriParts = explode('/', $uri);
 
 
-        // Ищем индекс элемента 'task-router'
-        $startIndex = array_search('task-router', $uriParts);
+        // Ищем индекс элемента 'some-route'
+        $startIndex = array_search('some-route', $uriParts);
         if ($startIndex !== false) {
-            // Берём все части начиная с 'task-router'
+            // Берём все части начиная с 'some-route'
             $uriParts = array_slice($uriParts, $startIndex);
         } else {
-            Logger::warning('task-router not found in URI parts', 'router');
+            Logger::warning('some-route not found in URI parts', 'router');
             ResponseBuilder::error("Неизвестный роут", 404);
         }
         // Logger::debug($uriParts, 'uriParts');
@@ -42,48 +42,13 @@ class Router
         }
         if ($uriParts[1] === 'task') {
             RequestValidator::validateInput($input);
-
-            switch ($uriParts[2] ?? '') {
-                case 'add':
-                    // TaskController::addToQueue($input);
-                    ExampleController::executeTaskAction($input, 'addToQueue');
-                    return;
-
-                case 'change-priority':
-                    // TaskController::changePriority($input);
-                    ExampleController::executeTaskAction($input, 'changePriority');
-                    return;
-
-                case 'reassign':
-                    // TaskController::reassign($input);
-                    ExampleController::executeTaskAction($input, 'reassign');
-                    return;
-
-                case 'move-to-request':
-                    // TaskController::moveToRequest($input);
-                    ExampleController::executeTaskAction($input, 'moveToRequest');
-                    return;
-
-                case 'complete':
-                    // TaskController::complete($input);
-                    ExampleController::executeTaskAction($input, 'complete');
-                    return;
-
-                case 'close':
-                    // TaskController::close($input);
-                    ExampleController::executeTaskAction($input, 'close');
-                    return;
-
-                case 'assign-from-queue':
-                    // TaskController::assignFromQueue($input);
-                    ExampleController::executeTaskAction($input, 'assignFromQueue');
-                    return;
-            }
+            ExampleController::executeTaskAction($input);
+            
         }
         
        
 
         Logger::error($uri, 'Неизвестный роут');
-        ResponseBuilder::error("Неизвестный роут", 404);
+        ResponseBuilder::error("Неизвестный роут");
     }
 }

@@ -20,7 +20,6 @@ class ExampleController
             // code
         } catch (\Throwable $error) {
             Logger::error($error->getMessage());
-            TelegramService::criticalError($error->getMessage());
             ResponseBuilder::error($error->getMessage());
         }
 
